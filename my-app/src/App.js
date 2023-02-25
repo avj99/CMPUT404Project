@@ -1,12 +1,10 @@
 import React from "react";
-import{ Typography, } from '@mui/material'
-
-
-
-const App= ( ) =>{
+import ButtonAppBar from "./components/navbar/navbar";
+function App ( ){
+    
     return (
-        <div>
-            <Typography variant = "h1">Hello, World!</Typography>
+        <div className="App">
+            <ButtonAppBar></ButtonAppBar>
         </div>
     );
 }
