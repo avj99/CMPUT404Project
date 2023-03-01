@@ -1,4 +1,5 @@
 {% extends "stream/base.html" %}
+{% load md2 %}
 {% block content %}
     {% for post in posts %}
         <article class="media content-section">
@@ -9,7 +10,7 @@
                 <small class="text-muted">{{ post.date_posted }}</small>
             </div>
             <h2><a class="article-title" href="{% url "post-detail" post.id %}">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
+            <p class="article-content">{{ post.content|markdown }}</p>
             </div>
         </article>
     {% endfor %}
