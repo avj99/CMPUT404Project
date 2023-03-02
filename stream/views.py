@@ -151,9 +151,9 @@ def friends_add(request):
     if not User.objects.filter(id=id).all():
         return render(request, "stream/error.html",
                       {'title': "This ID can't be found. You can't add friends"})
-    # 查询是否已经是加过的好友
+    # query friend
     if not Friends.objects.filter(uid=request.user.id, friend_id=id).all():
-        # 可以添加
+        # can add
         Friends.objects.create(uid=request.user.id, friend_id=id, is_new=1, join_date=time())
     else:
         return render(request, "stream/error.html",
@@ -175,12 +175,13 @@ def friends_del(request):
     if not User.objects.filter(id=id).all():
         return render(request, "stream/error.html",
                       {'title': "This ID can't be found. You can't add friends"})
-    # 查询是否已经是加过的好友
+    # find has friends
     if Friends.objects.filter(
             Q(friend_id=id) | Q(uid=request.user.id) | Q(uid=id) | Q(friend_id=request.user.id)).all():
-        # 可以删除
+        # can del
         Friends.objects.filter(id=Friends.objects.filter(
-            Q(friend_id=id) | Q(uid=request.user.id) | Q(uid=id) | Q(friend_id=request.user.id)).all().first().id).delete()
+            Q(friend_id=id) | Q(uid=request.user.id) | Q(uid=id) | Q(
+                friend_id=request.user.id)).all().first().id).delete()
     else:
         return render(request, "stream/error.html",
                       {'title': "He is not your friend !!"})
@@ -200,9 +201,9 @@ def friends_success(request):
     if not User.objects.filter(id=id).all():
         return render(request, "stream/error.html",
                       {'title': "This ID can't be found. You can't add friends"})
-    # 查询是否已经是加过的好友
+
     if Friends.objects.filter(friend_id=request.user.id, uid=id).all():
-        # 可以更新
+
         Friends.objects.filter(uid=id, friend_id=request.user.id).update(is_new=2)
     else:
         return render(request, "stream/error.html",
@@ -225,9 +226,9 @@ def friends_refuse(request):
     if not User.objects.filter(id=id).all():
         return render(request, "stream/error.html",
                       {'title': "This ID can't be found. You can't add friends"})
-    # 查询是否已经是加过的好友
+
     if Friends.objects.filter(friend_id=request.user.id, uid=id).all():
-        # 可以up
+
         Friends.objects.filter(uid=id, friend_id=request.user.id).delete()
     else:
         return render(request, "stream/error.html",
