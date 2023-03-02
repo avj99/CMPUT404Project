@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.decorators import user_passes_test, login_required
+from django.utils.decorators import method_decorator
+from django.urls import reverse_lazy
 
 '''
 Example Post Format
@@ -15,6 +18,12 @@ Example Post Format
 
 # render(request, page to render, context)
 
+@user_passes_test(lambda u: not u.is_authenticated, login_url='stream-home')
+def welcome(request):
+    return render(request, "stream/welcome.html")
+
+
+@login_required
 def home(request):
     context = {
         "posts": Post.objects.all()
@@ -22,15 +31,18 @@ def home(request):
     return render(request, "stream/home.html", context)
 
 # See if we can filter post here
+@method_decorator(login_required(login_url=reverse_lazy('welcome')), name='dispatch')
 class PostListView(ListView):
     model = Post
     template_name = "stream/home.html"
     context_object_name = "posts"
     ordering = ['-date_posted']
 
+@method_decorator(login_required(login_url=reverse_lazy('welcome')), name='dispatch')
 class PostDetailView(DetailView):
     model = Post
 
+@method_decorator(login_required(login_url=reverse_lazy('welcome')), name='dispatch')
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ["title", "content"]
@@ -40,6 +52,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
     
+@method_decorator(login_required(login_url=reverse_lazy('welcome')), name='dispatch')
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     fields = ["title", "content"]
@@ -56,6 +69,8 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return True
         return False
 
+
+@method_decorator(login_required(login_url=reverse_lazy('welcome')), name='dispatch')
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
 
@@ -68,6 +83,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
     
+@login_required
 def about(request):
     return render(request, "stream/about.html", {'title': 'About'})
 
