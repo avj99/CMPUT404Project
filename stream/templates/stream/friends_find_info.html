@@ -1,0 +1,30 @@
+{% extends "stream/base.html" %}
+{% load static %}
+{% block content %}
+    <h1 style="margin-bottom: 20px"><a href="/friends"> < </a>Search Friends List</h1>
+    <h4 style="font-size: 10px;margin-bottom: 20px">
+        <form action="/friends/find" method="get">
+            <input name="id" style="width: 60%;" type="number"
+                   placeholder="Please enter your friend's ID (ID can be viewed in the navigation bar)"/>
+            <button type="submit"> + Find Friend & add</button>
+        </form>
+
+    </h4>
+    {% for post in friends %}
+        <article class="media content-section">
+            <div style="margin-top: 10px">
+                <div><a class="mr-2" href="#">{{ post.username }}</a></div>
+                <div>
+                    <small>{{ post.date_joined }}</small>
+                </div>
+                <div>
+                    <form action="/friends/add">
+                        <input name="id" value="{{ post.id }}" style="display: none">
+                        <button style="font-size: 10px">➕ Add</button>
+                    </form>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
+

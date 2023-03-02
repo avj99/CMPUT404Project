@@ -1,0 +1,57 @@
+{% extends "stream/base.html" %}
+{% load static %}
+{% block content %}
+    <h1 style="margin-bottom: 20px">My Friends List <span class="badge badge-danger">{{ friends | length }}</span></h1>
+    <h4 style="font-size: 10px;margin-bottom: 20px">
+        <form action="/friends/find" method="get">
+            <input class="form-control" name="id" style="width: 100%;"
+                   type="number"
+                   placeholder="Please enter your friend's ID (ID can be viewed in the navigation bar)"/>
+            <button type="submit" class="btn bt-default" style="margin-top: 20px"> + Find Friend & add</button>
+        </form>
+
+    </h4>
+    {% for post in friends %}
+        <article class="media content-section">
+            {#            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"#}
+            {#                 style="margin-top: 15px;margin-right: 40px">#}
+            <div style="margin-top: 10px">
+                <div><a class="mr-2" href="#">Username：{{ post.uid }}   (ID: {{ post.uid.id }})</a></div>
+                <div>
+                    <small>{{ post.date_posted }}</small>
+                </div>
+                <div >
+                    <form action="/friends/del">
+                        <input name="id" value="{{ post.uid.id }}" style="display: none">
+                        <button style="font-size: 10px" type="submit">➖ Remove</button>
+                    </form>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+
+    <h1 style="margin-bottom: 20px">👬🏻 Receive New Friends Messages </h1>
+    {% for post in posts2 %}
+        <article class="media content-section">
+            {#            <img class="rounded-circle article-img" src="{{ post. }}">#}
+            <div style="margin-top: 10px">
+                <div><a class="mr-2" href="#">{{ post.uid }}(ID: {{ post.uid.id }})</a></div>
+                <div>
+                    <small>Wants to add you as a friend</small>
+                </div>
+                <div>
+                    <form action="/friends/success">
+                        <input name="id" value="{{ post.uid.id }}" style="display: none">
+                        <button style="font-size: 10px">✅ Success</button>
+                    </form>
+                    <form action="/friends/refuse">
+                        <input name="id" value="{{ post.uid.id }}" style="display: none">
+                        <button style="font-size: 10px"> ❌ Refuse</button>
+                    </form>
+
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
+

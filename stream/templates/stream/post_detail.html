@@ -1,5 +1,4 @@
 {% extends "stream/base.html" %}
-{% load md2 %}
 {% block content %}
     <article class="media content-section">
         <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
@@ -15,7 +14,7 @@
             </div>
         </div>
         <h2 class="article-title">{{ object.title }}</h2>
-        <p class="article-content">{{ object.content|markdown }}</p>
+        <p class="article-content">{{ object.content }}</p>
         </div>
     </article>
 {% endblock content %}
