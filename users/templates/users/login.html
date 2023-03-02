@@ -1,22 +1,32 @@
-{% extends "stream/base.html" %}
+{% extends "stream/base-no-side-bar.html" %}
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Login</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Login</button>
+    <!-- OLD VERSION -->
+    <div style="padding-top: 7%">
+    <div class="card bg-secondary mb-3" style="max-width: 30%; margin: auto; padding-top: 1%">
+        <div class="card-header bg-secondary">
+            <h3 style="text-align: center">Login</h3>
+        </div>
+        <div class="card-body" style="margin-top: -60px;">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    {{ form|crispy|linebreaksbr }}
+                </fieldset>
+                <div class="form-group">
+                    <div style="text-align: center">
+                        <button class="btn btn-primary" type="submit">Login</button>
+                    </div>
+                </div>
+            </form>
+            <br>
+            <div class="border-top pt-3">
+                <small class="text-muted">
+                    Need An Account? <a class="ml-2" style="text-decoration: none;" href="{% url "register" %}">Sign Up Now</a>
+                </small>
             </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Need An Account? <a class="ml-2" href="{% url "register" %}">Sign Up Now</a>
-            </small>
         </div>
     </div>
+
 {% endblock content %}
