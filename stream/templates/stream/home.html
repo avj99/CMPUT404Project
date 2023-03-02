@@ -10,6 +10,25 @@
             </div>
             <h2><a class="article-title" href="{% url "post-detail" post.id %}">{{ post.title }}</a></h2>
             <p class="article-content">{{ post.content }}</p>
+            
+            <hr>
+            <h3>Comments: </h2>
+            <hr>
+            {% if not post.main_comments.all %}
+                No Comments Found!
+                <br/>
+                <a href = "{%url 'post-comments' post.id%}"> Comment</a>
+                <hr>
+            {% else %}
+                {% for comment in post.main_comments.all %}
+                    <small class="text-danger">{{ comment.name }}</small>
+                    <small class="text-muted">{{ comment.main_date}}</small>
+                    <br/>
+                    {{ comment.body }}
+                    <hr>
+                {% endfor %}
+                <a href = "{%url 'post-comments' post.id%}"> Comment</a>
+            {% endif %}
             </div>
         </article>
     {% endfor %}
