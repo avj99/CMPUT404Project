@@ -14,7 +14,8 @@
             </div>
         </div>
         <h2 class="article-title">{{ object.title }}</h2>
-        <p class="article-content">{{ object.content }}</p>
+        <!-- HERE I added urlize here to make links clickable, currently not working -->
+        <p class="article-content">{{ object.content|urlize }}</p>
         </div>
     </article>
 {% endblock content %}

@@ -47,6 +47,9 @@ body {
   
   .article-content {
     white-space: pre-line;
+    overflow: hidden;
+    white-space: nowrap;
+    /* HERE are the changes I made to hide the overflowing text */
   }
   
   .article-img {
