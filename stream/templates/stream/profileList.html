@@ -1,0 +1,13 @@
+{% extends "stream/base.html" %}
+{% block content %}
+    <h1>Profile List!</h1>
+<br/>
+{% if profiles %}
+    {% for profile in profiles%}
+            Username: {{profile.user.username}}<br/>
+            Link: @{{profile.user.username|lower}}<br/>
+            Last Updated: {{ profile.dateModified}}
+            <br/><br/>
+        {%endfor%}
+{% endif%}
+{% endblock %}
