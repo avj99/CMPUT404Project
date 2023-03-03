@@ -180,8 +180,7 @@ def friends_del(request):
             Q(friend_id=id) | Q(uid=request.user.id) | Q(uid=id) | Q(friend_id=request.user.id)).all():
         # can del
         Friends.objects.filter(id=Friends.objects.filter(
-            Q(friend_id=id) | Q(uid=request.user.id) | Q(uid=id) | Q(
-                friend_id=request.user.id)).all().first().id).delete()
+            Q(friend_id=id) | Q(uid=request.user.id) | Q(uid=id) | Q(friend_id=request.user.id)).all().first().id).delete()
     else:
         return render(request, "stream/error.html",
                       {'title': "He is not your friend !!"})
