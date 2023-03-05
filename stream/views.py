@@ -2,14 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Comment
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-<<<<<<< HEAD
+
 from django.urls import reverse_lazy, reverse 
 from django.http import HttpResponseRedirect
-=======
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
->>>>>>> 1c3be4502241920a263363d59feb7afa29e47ad9
+
 
 '''
 Example Post Format
