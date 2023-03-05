@@ -1,4 +1,5 @@
 {% extends "stream/base.html" %}
+{% load md2 %}
 {% block content %}
     {% for post in posts %}
         <article class="media content-section">
@@ -9,6 +10,7 @@
                 <small class="text-muted">{{ post.date_posted }}</small>
             </div>
             <h2><a class="article-title" href="{% url "post-detail" post.id %}">{{ post.title }}</a></h2>
+<<<<<<< HEAD
             <p class="article-content">{{ post.content }}</p>
             
             <hr>
@@ -29,6 +31,9 @@
                 {% endfor %}
                 <a href = "{%url 'post-comments' post.id%}"> Comment</a>
             {% endif %}
+=======
+            <p class="article-content">{{ post.content|markdown|urlize }}</p>
+>>>>>>> 1c3be4502241920a263363d59feb7afa29e47ad9
             </div>
         </article>
     {% endfor %}

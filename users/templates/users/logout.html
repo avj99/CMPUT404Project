@@ -1,10 +1,15 @@
-{% extends "stream/base.html" %}
+{% extends "stream/base-no-side-bar.html" %}
 
 {% block content %}
-    <h2>You have been logged out</h2>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            <a href="{% url "login" %}">Login Again</a>
-        </small>
+    <div style="margin: auto; width: 70%; text-align: center; padding-top: 20%;">
+        <h1 style="font-size: 50px">
+            You have been logged out. 👋
+        </h1>
+        <p>
+            <a style="text-decoration: none;"href="{% url 'login' %}">
+                Login Again
+            </a> 
+        </p>
     </div>
+
 {% endblock content %}

@@ -2,8 +2,14 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Comment
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+<<<<<<< HEAD
 from django.urls import reverse_lazy, reverse 
 from django.http import HttpResponseRedirect
+=======
+from django.contrib.auth.decorators import user_passes_test, login_required
+from django.utils.decorators import method_decorator
+from django.urls import reverse_lazy
+>>>>>>> 1c3be4502241920a263363d59feb7afa29e47ad9
 
 '''
 Example Post Format
@@ -17,6 +23,12 @@ Example Post Format
 
 # render(request, page to render, context)
 
+@user_passes_test(lambda u: not u.is_authenticated, login_url='stream-home')
+def welcome(request):
+    return render(request, "stream/welcome.html")
+
+
+@login_required
 def home(request):
     context = {
         "posts": Post.objects.all()
@@ -24,15 +36,18 @@ def home(request):
     return render(request, "stream/home.html", context)
 
 # See if we can filter post here
+@method_decorator(login_required(login_url=reverse_lazy('welcome')), name='dispatch')
 class PostListView(ListView):
     model = Post
     template_name = "stream/home.html"
     context_object_name = "posts"
     ordering = ['-date_posted']
 
+@method_decorator(login_required(login_url=reverse_lazy('welcome')), name='dispatch')
 class PostDetailView(DetailView):
     model = Post
 
+@method_decorator(login_required(login_url=reverse_lazy('welcome')), name='dispatch')
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     fields = ["title", "content"]
@@ -42,6 +57,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
     
+@method_decorator(login_required(login_url=reverse_lazy('welcome')), name='dispatch')
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     fields = ["title", "content"]
@@ -58,6 +74,8 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
             return True
         return False
 
+
+@method_decorator(login_required(login_url=reverse_lazy('welcome')), name='dispatch')
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
 
@@ -80,6 +98,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
     
+@login_required
 def about(request):
     return render(request, "stream/about.html", {'title': 'About'})
 

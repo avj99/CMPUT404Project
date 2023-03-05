@@ -11,4 +11,5 @@ urlpatterns = [
     path('post/<int:pk>/comment/', CommentCreateView.as_view(), name='post-comments'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),
     path('about/', views.about, name='stream-about'),
+    path('welcome/', views.welcome, name = 'welcome')
 ]

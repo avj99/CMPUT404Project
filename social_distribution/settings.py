@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # Plugins
     "crispy_forms",
     'crispy_bootstrap4',
+    "django_markdown2",
 
     # Our apps
     "stream.apps.StreamConfig",
