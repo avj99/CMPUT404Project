@@ -1,10 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Post
+from .models import Post, Comment
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+
+from django.urls import reverse_lazy, reverse 
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import user_passes_test, login_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
+
 
 '''
 Example Post Format
@@ -82,8 +86,36 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
+
+class CommentCreateView(LoginRequiredMixin, CreateView):
+    model = Comment
+    fields = ["name", "body"]
+
+    # Set post author to current login user
+    def form_valid(self, form):
+        form.instance.main_post_id = self.kwargs['pk']
+        return super().form_valid(form)
+    
     
 @login_required
 def about(request):
     return render(request, "stream/about.html", {'title': 'About'})
+
+'''def post_liked(request, pk):
+    post = get_object_or_404(Post, id = request.POST.get('post_id'))
+    post.howManyLike.add(request.user)
+    return HttpResponseRedirect(reverse('post-detail', args = [str(pk)]))
+
+    mainuser = request.user
+    print(post.id)
+    if (request.method == 'GET'):
+        id_post = request.get('id_post')
+        post_post = Post.objects.get(id='id_post')
+
+        if mainuser in post_post.howManyLike.all():
+            post_post.remove(mainuser)
+        else:
+            post_post.add(mainuser)
+
+    return redirect('stream:stream-home')''' 
 
