@@ -22,8 +22,11 @@ class testModels(TestCase):
             body = 'test body',
             # main_date =
         )
+    #testing Posts
     def test_Post(self):
         self.assertEquals(self.post1.author,self.user)
 
+    #testing Comments 
     def test_Comment(self):
         self.assertEquals(self.comment1.main_post,self.post1)
+
