@@ -13,4 +13,5 @@
 3. We also referred a set of videos from the following link: https://www.youtube.com/watch?v=B40bteAMM_M&list=PLCC34OHNcOtr025c1kHSPrnP18YPB-NFi in order to understand how we should implement certain requirements/ functionlaities mentioned in the project decsription (like how to install comments under a posts, how to make profiles etc).
 
 **DOCUMENTATION (NOT YET REACH THIS FAR)**
+
 User stories we implemented did not use APIs and also the application is not yet deployed, which will be picked up on Part 2.
