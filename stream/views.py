@@ -49,7 +49,7 @@ class PostDetailView(DetailView):
 @method_decorator(login_required(login_url=reverse_lazy('welcome')), name='dispatch')
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ["title", "content"]
+    fields = ["title", "content","image"]
 
     # Set post author to current login user
     def form_valid(self, form):
@@ -59,7 +59,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 @method_decorator(login_required(login_url=reverse_lazy('welcome')), name='dispatch')
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ["title", "content"]
+    fields = ["title", "content","image"]
 
     # Set post author to current login user
     def form_valid(self, form):
