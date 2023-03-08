@@ -10,11 +10,18 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now) 
     '''https://www.youtube.com/watch?v=xqFM6ykQEwo'''
     howManyLike = models.ManyToManyField(User,related_name= "howManyLike")
+    image = models.ImageField(upload_to="uploads/post_photo", blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE) # If user is deleted, all his/her posts are deleted
 
 
     def __str__(self):
-        return self.title
+        return (
+            f"{self.author}"
+            f"({self.date_posted:%Y-%m-%d %H:%M}): "
+            f"{self.title}"
+            f"{self.content}"
+            f"{self.image}"
+        )    
 
     def get_absolute_url(self):
         return reverse("post-detail", kwargs={"pk": self.pk})
