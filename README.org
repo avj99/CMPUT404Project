@@ -14,7 +14,7 @@
 4. Building API: https://pypi.org/project/djangorestframework/
 
 ** API Documentation
-These are the API for the Part I.
+These are the API for the Part I. Note that Users are Django built-in accounts, and Profile are authors in the requirement context.
 *** Users
     - URL: ://api/users/{AUTHOR_ID}/
       - Allow: GET, POST, HEAD, OPTIONS
@@ -24,8 +24,7 @@ These are the API for the Part I.
         "url": "http://localhost:8000/api/users/1/",
         "username": "admin",
         "email": "admin@domain.com"
-      }
-      #+END_SRC
+      }#+END_SRC
 
 *** Profile
     - URL: ://api/profile/{PROFILE_ID}/
@@ -41,8 +40,7 @@ These are the API for the Part I.
             "http://localhost:8000/api/profile/11/",
             "http://localhost:8000/api/profile/12/"
         ]
-      }
-      #+END_SRC
+      }#+END_SRC
 
 *** Post
     - URL: ://api/post/{POST_ID}/
@@ -56,8 +54,7 @@ These are the API for the Part I.
         "howManyLike": [],
         "image": null,
         "author": "http://localhost:8000/api/users/1/"
-      }
-      #+END_SRC
+      }#+END_SRC
 
 *** Comment
     - URL: ://api/comment/{COMMENT_ID}/
@@ -69,5 +66,4 @@ These are the API for the Part I.
         "name": "Javin",
         "body": "love it",
         "main_date": "2023-03-01T16:35:15.539830-07:00"
-      }
-      #+END_SRC
+      }#+END_SRC
