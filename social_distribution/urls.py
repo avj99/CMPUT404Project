@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 from rest_framework import routers, serializers, viewsets
 from django.contrib.auth.models import User
 from stream.models import Post, Comment
+from users.models import Profile
 
 # Users API
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -53,11 +54,22 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
+# Profile API
+class ProfileSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Profile
+        fields = ['user', 'image', 'follows']
+
+class ProfileViewSet(viewsets.ModelViewSet):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
 # Routers provide a way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'post', PostViewSet)
 router.register(r'comment', CommentViewSet)
+router.register(r'profile', ProfileViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

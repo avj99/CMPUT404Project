@@ -7,13 +7,14 @@
 4. Zhiyuan Yu (zyu6)
 5. Lok Him Isaac Cheng (lokhimis)
 
-** The links that were used/referred to while completing the work for the part 1 are as follows:
-1. We referred to this link: https://www.youtube.com/watch?v=qwypH3YvMKc&list=PLbpAWbHbi5rMF2j5n6imm0enrSD9eQUaM in order to understand how to document the test cases for our project.
-2. We referred to this some of videos in order to understand Django application and funtionalities from the follwing link: https://www.youtube.com/watch?v=UmljXZIypDc&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p
-3. We also referred a set of videos from the following link: https://www.youtube.com/watch?v=B40bteAMM_M&list=PLCC34OHNcOtr025c1kHSPrnP18YPB-NFi in order to inspire us on implementing certain features.
+** Resources Used for Part I
+1. Django testing: https://www.youtube.com/watch?v=qwypH3YvMKc&list=PLbpAWbHbi5rMF2j5n6imm0enrSD9eQUaM 
+2. Updating model using forms: https://www.youtube.com/watch?v=UmljXZIypDc&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p
+3. Various features: https://www.youtube.com/watch?v=B40bteAMM_M&list=PLCC34OHNcOtr025c1kHSPrnP18YPB-NFi
+4. Building API: https://pypi.org/project/djangorestframework/
 
 ** API Documentation
-These are the API for the Part 1.
+These are the API for the Part I.
 *** Users
     - URL: ://api/users/{AUTHOR_ID}/
       - Allow: GET, POST, HEAD, OPTIONS
@@ -23,6 +24,23 @@ These are the API for the Part 1.
         "url": "http://localhost:8000/api/users/1/",
         "username": "admin",
         "email": "admin@domain.com"
+      }
+      #+END_SRC
+
+*** Profile
+    - URL: ://api/profile/{PROFILE_ID}/
+      - Allow: GET, POST, HEAD, OPTIONS
+    - Example Format:
+      #+BEGIN_SRC json
+      {
+        "user": "http://localhost:8000/api/users/1/",
+        "image": "http://localhost:8000/media/profile_pics/day.jpg",
+        "follows": [
+            "http://localhost:8000/api/profile/6/",
+            "http://localhost:8000/api/profile/10/",
+            "http://localhost:8000/api/profile/11/",
+            "http://localhost:8000/api/profile/12/"
+        ]
       }
       #+END_SRC
 
@@ -53,4 +71,3 @@ These are the API for the Part 1.
         "main_date": "2023-03-01T16:35:15.539830-07:00"
       }
       #+END_SRC
-    
