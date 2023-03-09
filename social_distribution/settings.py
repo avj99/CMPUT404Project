@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     'crispy_bootstrap4',
     "django_markdown2",
+    'rest_framework',
 
     # Our apps
     "stream.apps.StreamConfig",
@@ -136,3 +137,11 @@ MEDIA_URL = "/media/"
 
 LOGIN_REDIRECT_URL = "stream-home"
 LOGIN_URL = "login"
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+    ]
+}

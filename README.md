@@ -12,6 +12,16 @@
 2. We referred to this some of videos in order to understand Django application and funtionalities from the follwing link: https://www.youtube.com/watch?v=UmljXZIypDc&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p
 3. We also referred a set of videos from the following link: https://www.youtube.com/watch?v=B40bteAMM_M&list=PLCC34OHNcOtr025c1kHSPrnP18YPB-NFi in order to inspire us on implementing certain features.
 
-**API DOCUMENTATION (NOT YET REACH THIS FAR)**
-
-User stories we implemented did not use APIs and also the application is not yet deployed, which will be picked up on Part 2.
+**API Documentation**
+These are the API for the Part 1.
+***Users
+    - URL: ://api/users/{AUTHOR_ID}/
+      - Allow: GET, POST, HEAD, OPTIONS
+    - Example Format:
+      #+BEGIN_SRC json
+      {
+        "url": "http://localhost:8000/api/users/1/",
+        "username": "admin",
+        "email": "admin@domain.com"
+      }
+      #+END_SRC
